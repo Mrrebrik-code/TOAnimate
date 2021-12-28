@@ -9,6 +9,7 @@ public class ExampleTOA : MonoBehaviour
 	[SerializeField] private Image _image;
 	private bool _isFadering = false;
 	private bool _isMoving = false;
+	private bool _isColoring = false;
 	private bool _isLeft = false;
 	[SerializeField] private RectTransform[] _positions;
 	public void Update()
@@ -25,11 +26,19 @@ public class ExampleTOA : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.A) && _isMoving == false)
 		{
 			_isMoving = true;
-			_image.rectTransform.TOAMove(_isLeft ? _positions[0].anchoredPosition : _positions[1].anchoredPosition, 5f, () =>
+			_image.rectTransform.TOAMove(_isLeft ? _positions[0].localPosition : _positions[1].localPosition, 5f, () =>
 			{
 				Debug.Log("Animation TOAMove to image complet!");
 				_isLeft = !_isLeft;
 				_isMoving = false;
+			});
+		}
+		if (Input.GetKeyDown(KeyCode.D) && _isColoring == false)
+		{
+			_isColoring = true;
+			_image.TOAColor(_image.color == Color.green ? Color.red : Color.green, 0.02f, () =>
+			{
+				_isColoring = false;
 			});
 		}
 	}

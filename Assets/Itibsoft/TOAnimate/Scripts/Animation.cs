@@ -20,6 +20,11 @@ namespace Itibsoft.TOAnimate
 		{
 			TOAnimate.Instance.Move(recTransform, recTransform.anchoredPosition, target, time, callback);
 		}
+
+		public static void TOAColor(this Image image, Color target, float time, Action callback)
+		{
+			TOAnimate.Instance.Color(image, image.color, target, time, callback);
+		}
 	}
 }
 

@@ -79,5 +79,25 @@ namespace Itibsoft.TOAnimate
 			callback?.Invoke();
 		}
 		#endregion
+
+		#region Color
+		public void Color(Image image, Color start, Color target, float time, Action callback )
+		{
+			StartCoroutine(DOColorCoroutine(image, start, target, time, callback));
+		}
+
+		private IEnumerator DOColorCoroutine(Image image, Color start, Color target, float time, Action callback)
+		{
+			var startColor = start;
+			while (image.color != target)
+			{
+				startColor = UnityEngine.Color.Lerp(startColor, target, time);
+				image.color = startColor;
+				yield return null;
+			}
+			callback?.Invoke();
+		}
+
+		#endregion
 	}
 }
